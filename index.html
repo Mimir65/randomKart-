@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1.0.0">
+  <link rel="stylesheet" href="style.css?v=1.0.1">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -36,24 +36,38 @@
     </section>
 
     <section class="intro challenge-hero" id="play">
-      <div class="hero-left">
-        <div class="eyebrow"><span class="eyebrow-line"></span> COMMUNITY ARCADE / SHPUNDIKID</div>
-        <h1>YOUR MATCH.<br><em>YOUR NIGHTMARE.</em></h1>
-        <p>Вытяни испытание. Прими условия. Докажи, что способен его выполнить. Никаких перебросов — только хаос.</p>
-        <div class="hero-meta"><span><b id="heroChallengeCount">217</b>+ CHALLENGES</span><b>✳</b><span>RANDOM DRAW</span><b>✳</b><span>NO REROLLS</span></div>
-        <div class="hero-side-note"><span>01 / THE DRAW</span><br>ONE CARD. NO MERCY.</div>
-      </div>
-      <div class="hero-draw">
-        <div class="hero-draw-top"><span>CHALLENGE TERMINAL / LIVE</span><span><i></i> READY</span></div>
-        <div class="hero-card" id="soloCard" aria-live="polite">
-          <span class="draw-card-index">CARD / 000</span>
-          <strong>READY FOR<br>THE CHALLENGE?</strong>
-          <small>НАЖМИ, ЧТОБЫ ВЫТЯНУТЬ СЛУЧАЙНОЕ ИСПЫТАНИЕ</small>
+      <div class="hero-topline">
+        <div class="hero-left">
+          <div class="eyebrow"><span class="eyebrow-line"></span> COMMUNITY ARCADE / SHPUNDIKID</div>
+          <h1 class="hero-title"><span class="title-line title-line-one">YOUR MATCH.</span><span class="title-line title-line-two">YOUR NIGHTMARE.</span></h1>
+          <p>Вытяни испытание. Прими условия. Докажи, что способен его выполнить.</p>
+          <div class="hero-meta"><span><b id="heroChallengeCount">217</b>+ CHALLENGES</span><b>✳</b><span>RANDOM DRAW</span><b>✳</b><span>NO REROLLS</span><b>✳</b><span>JUST CHAOS</span></div>
         </div>
-        <button class="action-btn hot hero-draw-btn" id="soloDraw">ВЫТЯНУТЬ КАРТУ ↗</button>
-        <button class="action-btn complete-btn" id="soloComplete" disabled>✓ ЗАДАНИЕ ВЫПОЛНЕНО</button>
-        <div class="hero-round"><span id="soloRound">ROUND / 01</span><span>DECK <b id="soloProgress">0 / 217</b></span><button id="resetSolo" class="reset-btn" type="button">RESET</button></div>
+        <div class="hero-character-deck" aria-label="Колода игровых карточек">
+          <div class="deck-orbit orbit-one"></div><div class="deck-orbit orbit-two"></div>
+          <div class="character-card character-baba"><span class="character-card-tag">01 / THE WILD</span><b>BABA</b><small>CHAOS PICK</small><i>✳</i></div>
+          <div class="character-card character-seven"><span class="character-card-tag">03 / THE MACHINE</span><b>SEVEN</b><small>HEAVY DUTY</small><i>◈</i></div>
+          <div class="character-card character-graves"><span class="character-card-tag">★ FEATURED CARD</span><b>GRAVES</b><small>LEADER PICK</small><i>♛</i></div>
+          <div class="deck-caption"><span>THE CHARACTER DECK</span><b>01 — 03 / ROTATING</b></div>
+        </div>
       </div>
+      <div class="hero-draw draw-platform">
+        <div class="platform-label"><span>CHALLENGE TERMINAL / LIVE</span><span><i></i> READY TO DRAW</span></div>
+        <div class="draw-platform-inner">
+          <div class="draw-stack" aria-hidden="true"><span></span><span></span><span></span><div class="draw-stack-card"><b>?</b><small>UNKNOWN<br>CHALLENGE</small></div></div>
+          <div class="hero-card" id="soloCard" aria-live="polite">
+            <span class="draw-card-index">CARD / 000</span>
+            <strong>READY FOR<br>THE CHALLENGE?</strong>
+            <small>НАЖМИ, ЧТОБЫ ВЫТЯНУТЬ СЛУЧАЙНОЕ ИСПЫТАНИЕ</small>
+          </div>
+          <div class="draw-actions"><span class="draw-action-kicker">NO REROLLS. NO EXCUSES.</span>
+            <button class="action-btn hot hero-draw-btn" id="soloDraw">ВЫТЯНУТЬ КАРТУ ↗</button>
+            <button class="action-btn complete-btn" id="soloComplete" disabled>✓ ЗАДАНИЕ ВЫПОЛНЕНО</button>
+            <div class="hero-round"><span id="soloRound">ROUND / 01</span><span>DECK <b id="soloProgress">0 / 217</b></span><button id="resetSolo" class="reset-btn" type="button">RESET</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-bottom-mark"><span>DEADLOCK CHALLENGE</span><b>DRAW YOUR FATE ↗</b></div>
     </section>
 
     <section class="arcade-strip" id="challenges">
@@ -102,6 +116,6 @@
   </main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js?v=1.0.0"></script>
+  <script src="app.js?v=1.0.1"></script>
 </body>
 </html>

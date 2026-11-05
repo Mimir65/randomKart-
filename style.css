@@ -475,3 +475,75 @@ html{scroll-padding-top:82px}
 @media(max-width:700px){.topbar{height:64px;padding:0 5%;gap:12px}.brand{min-width:0}.top-status{font-size:7px;margin-left:auto}.top-status small{display:none}.menu-btn{display:block}.main-nav{display:none;position:absolute;top:63px;left:0;right:0;height:auto;padding:14px 5%;background:#171714;border-bottom:1px solid #45453b;flex-direction:column;align-items:flex-start;gap:17px}.main-nav.open{display:flex}.main-nav a.active:after{display:none}.ticker{height:25px}.challenge-hero{min-height:auto;grid-template-columns:1fr;padding:34px 5% 36px;gap:28px}.hero-left h1{font-size:clamp(60px,13vw,82px);margin:20px 0 15px}.hero-meta{margin-top:22px}.hero-draw{justify-self:stretch;max-width:none;transform:none;padding:11px}.hero-card{min-height:230px}.hero-card strong{font-size:clamp(38px,10vw,54px)}.arcade-strip{padding:36px 5% 42px}.strip-head{align-items:flex-start;gap:10px}.strip-note{font-size:7px}.arcade-cards{grid-template-columns:1fr}.arcade-tile{min-height:190px}.tile-main{grid-row:auto}.tile-cycle{min-height:180px}.duo-entry{padding:26px 5%}.room-section,.game-section{padding:40px 5%}.footer{padding:24px 5%;font-size:7px}}
 @media(max-width:420px){.top-status{display:none}.hero-left h1{font-size:57px}.hero-meta{font-size:6px}.hero-card{min-height:210px;padding:20px 14px}.hero-card strong{font-size:38px}.strip-head{display:block}.strip-note{text-align:left;margin-top:12px}.hero-round{font-size:6px}.arcade-tile{padding:15px}.footer-right{width:100%;justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* v1.0.1 — kinetic card-arcade entrance */
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Rye&display=swap');
+.challenge-hero{display:block;min-height:calc(100svh - 105px);padding:clamp(28px,4vh,48px) 8.5% 28px;background:radial-gradient(ellipse at 77% 34%,#6b4a1a30 0,transparent 35%),radial-gradient(ellipse at 12% 75%,#b94d1f18 0,transparent 32%),linear-gradient(115deg,#0d0c0d 0%,#17130f 62%,#100f0d 100%)}
+.challenge-hero:after{right:8%;top:12%;width:clamp(300px,38vw,560px);height:clamp(300px,38vw,560px);border:1px dashed #8e6a2c38;box-shadow:0 0 0 24px #e8a43a08,0 0 0 62px #e8a43a05;animation:orbitPulse 8s ease-in-out infinite}
+.challenge-hero:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.25;background:repeating-linear-gradient(132deg,transparent 0 55px,#e7d4aa08 56px 57px),radial-gradient(circle at 50% 20%,#a15c2520,transparent 40%)}
+.hero-topline{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);align-items:center;gap:2vw;min-height:clamp(290px,40vh,420px)}
+.hero-left{position:relative;z-index:2;max-width:850px}
+.hero-left .eyebrow{font-size:9px;color:#e4a23c;letter-spacing:2px}
+.hero-title{margin:20px 0 18px;display:flex;flex-direction:column;align-items:flex-start;font-family:'Bowlby One SC',var(--display);font-weight:400;line-height:.82;letter-spacing:-.035em;text-shadow:5px 6px 0 #080706,9px 10px 0 #0008;transform:none}
+.hero-title .title-line{display:block;position:relative;white-space:nowrap;will-change:transform;animation:titleFloat 5s ease-in-out infinite}
+.title-line-one{font-size:clamp(56px,7.7vw,112px);color:#f0e9d8;transform:rotate(-2.2deg);margin-left:-5px}
+.title-line-two{font-size:clamp(52px,7.2vw,104px);color:#f27619;transform:rotate(1.2deg) skew(-3deg);margin:8px 0 0 12px;animation-delay:-2.3s!important;text-shadow:5px 6px 0 #080706,0 0 28px #e9681730}
+.hero-title .title-line-two:after{content:"";position:absolute;left:2%;right:3%;height:6px;bottom:-12px;background:#f27619;transform:rotate(-2deg);clip-path:polygon(0 30%,100% 0,96% 100%,3% 75%)}
+.hero-left p{margin:27px 0 0 12px;padding-left:15px;border-left:4px solid var(--acid);font-size:clamp(12px,1.1vw,15px);font-weight:800;line-height:1.5;max-width:520px;color:#e6dfd0}
+.hero-meta{margin:24px 0 0 12px;display:flex;gap:13px;align-items:center;font:800 9px var(--mono);letter-spacing:1px;color:#c3b9a6}
+.hero-meta> b{color:#f27619;font-size:15px}
+.hero-meta span:first-child{color:var(--acid)}
+.hero-character-deck{height:clamp(270px,36vw,410px);position:relative;isolation:isolate;perspective:900px;filter:drop-shadow(0 20px 20px #0009)}
+.deck-orbit{position:absolute;border:1px dashed #b98a3b55;border-radius:50%;inset:9% 3%;transform:rotate(-16deg);animation:deckOrbit 24s linear infinite}
+.orbit-two{inset:18% -4%;transform:rotate(32deg);border-color:#f2761940;animation-direction:reverse;animation-duration:32s}
+.character-card{position:absolute;width:39%;height:78%;top:10%;border:7px solid #d4c7aa;border-bottom-width:14px;border-radius:5px;background:#2a241c;box-shadow:8px 12px 0 #050505,0 0 22px #000;overflow:hidden;transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .3s;animation:cardBob 4s ease-in-out infinite}
+.character-card:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 10%,#fff2 45%,transparent 60%),repeating-linear-gradient(0deg,transparent 0 5px,#0002 6px);mix-blend-mode:screen;pointer-events:none}
+.character-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#090807e8 0%,transparent 55%)}
+.character-card b{position:absolute;z-index:2;bottom:12px;left:9px;font:400 clamp(21px,3vw,40px)/.8 'Rye',serif;color:#fff5e4;text-shadow:3px 4px #080706;letter-spacing:-1px}
+.character-card small{position:absolute;z-index:2;bottom:0;left:10px;font:700 7px var(--mono);letter-spacing:1.5px;color:#f0c37a}
+.character-card i{position:absolute;z-index:1;right:10px;top:26%;font-style:normal;font-size:clamp(40px,5vw,76px);color:#f1c65a99;text-shadow:0 0 25px #f6a52d66}
+.character-card-tag{position:absolute;z-index:2;left:8px;top:9px;font:700 7px var(--mono);letter-spacing:1px;color:#fff0d0;background:#17120ecc;padding:6px}
+.character-baba{left:3%;transform:rotate(-12deg);background:radial-gradient(circle at 48% 35%,#a76b79,#43313d 50%,#171519 85%);animation-delay:-1.3s}
+.character-baba i{color:#c77c9b}
+.character-seven{right:1%;transform:rotate(11deg);background:radial-gradient(circle at 50% 36%,#bd642c,#473024 52%,#171411 85%);animation-delay:-2.6s}
+.character-seven i{color:#e17a37}
+.character-graves{left:31%;top:3%;height:86%;width:42%;z-index:3;transform:rotate(2deg);border-color:#e8dfc8;box-shadow:0 0 0 2px #d7f34a,0 0 35px #d7f34a55,9px 13px 0 #050505;background:radial-gradient(circle at 50% 30%,#c4a16a,#4b3c32 46%,#171614 85%);animation-delay:-.4s}
+.character-graves i{color:var(--acid);text-shadow:0 0 22px #d7f34a}
+.hero-character-deck:hover .character-baba{transform:translate(-12px,-7px) rotate(-17deg)}
+.hero-character-deck:hover .character-seven{transform:translate(12px,-7px) rotate(16deg)}
+.hero-character-deck:hover .character-graves{transform:translateY(-12px) rotate(0) scale(1.035)}
+.deck-caption{position:absolute;bottom:0;left:15%;right:12%;display:flex;justify-content:space-between;font:700 8px var(--mono);letter-spacing:1.5px;color:#a89b83}
+.deck-caption b{color:var(--acid)}
+.draw-platform{position:relative;z-index:2;max-width:100%;margin:12px auto 0;padding:13px 16px 15px;background:linear-gradient(100deg,#211d17,#151512 60%,#21190f);border:1px solid #62502f;box-shadow:8px 9px 0 #080706,0 0 35px #e36a1c12;transform:rotate(-.25deg)}
+.draw-platform:before{content:"";position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(100deg,transparent,#f2a83b18,transparent);animation:platformSweep 6s linear infinite}
+.platform-label{display:flex;justify-content:space-between;font:700 8px var(--mono);letter-spacing:1.6px;color:#a89b83;border-bottom:1px solid #51432e;padding:0 3px 10px}
+.platform-label span:last-child{color:var(--acid)}.platform-label i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 10px var(--acid);margin-right:6px;animation:statusBlink 1.2s infinite}
+.draw-platform-inner{display:grid;grid-template-columns:150px minmax(260px,1fr) minmax(220px,.8fr);gap:20px;align-items:center;padding:13px 10px 0}
+.draw-stack{height:135px;position:relative;display:grid;place-items:center;perspective:600px}
+.draw-stack>span{position:absolute;width:78px;height:112px;border:2px solid #95866b;background:linear-gradient(145deg,#483b2d,#181714);border-radius:5px;box-shadow:4px 5px #070706}
+.draw-stack>span:nth-child(1){transform:rotate(-22deg) translate(-23px,3px);animation:stackWiggle 3.2s ease-in-out infinite}
+.draw-stack>span:nth-child(2){transform:rotate(18deg) translate(23px,0);animation:stackWiggle 3.2s ease-in-out -1.2s infinite}
+.draw-stack>span:nth-child(3){transform:rotate(-7deg) translateY(-5px);border-color:var(--acid);box-shadow:0 0 18px #d7f34a33}
+.draw-stack-card{z-index:2;width:78px;height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid #d7f34a;background:radial-gradient(circle,#3d4a18,#171911 70%);transform:rotate(4deg);box-shadow:0 0 20px #d7f34a44;animation:cardBob 3s ease-in-out infinite}
+.draw-stack-card b{font:900 53px 'Bowlby One SC';color:var(--acid);text-shadow:0 0 15px #d7f34a88}
+.draw-stack-card small{font:700 6px var(--mono);text-align:center;letter-spacing:1px;color:#eee4c9}
+.draw-platform .hero-card{min-height:150px;padding:17px 22px;background:linear-gradient(135deg,#34291d,#1b1a15 70%);border-color:#a17a3c;outline:1px dashed #8b6c39;outline-offset:-7px;transform:none}
+.draw-platform .hero-card strong{font:400 clamp(24px,3vw,40px)/.9 'Bowlby One SC',var(--display);letter-spacing:-1px;color:#f2e8d4;text-shadow:3px 4px #090807}
+.draw-platform .hero-card small{font-size:8px;color:#c6b89d}
+.draw-actions{display:flex;flex-direction:column;gap:8px;min-width:0}
+.draw-action-kicker{font:700 8px var(--mono);letter-spacing:1.5px;color:#a89b83;margin-bottom:2px}
+.draw-platform .hero-draw-btn,.draw-platform .complete-btn{width:100%;height:47px;font:900 12px 'Bowlby One SC',var(--display);letter-spacing:.4px}
+.draw-platform .hero-round{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #51432e;padding-top:8px;font:700 8px var(--mono);color:#a89b83}
+.hero-bottom-mark{display:flex;justify-content:space-between;margin:17px 2px 0;font:700 8px var(--mono);letter-spacing:2px;color:#625b4e}
+.hero-bottom-mark b{color:#e87925}
+@keyframes titleFloat{0%,100%{filter:drop-shadow(0 0 0 #f2761900)}50%{filter:drop-shadow(0 0 13px #f2761925)}}
+@keyframes cardBob{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@keyframes deckOrbit{to{rotate:360deg}}
+@keyframes orbitPulse{0%,100%{opacity:.35;scale:1}50%{opacity:.8;scale:1.035}}
+@keyframes platformSweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes stackWiggle{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@keyframes statusBlink{50%{opacity:.3;box-shadow:none}}
+@media(max-width:900px){.challenge-hero{padding-left:5%;padding-right:5%}.hero-topline{grid-template-columns:1fr .85fr;gap:10px}.title-line-one{font-size:clamp(52px,8vw,78px)}.title-line-two{font-size:clamp(46px,7.4vw,72px)}.draw-platform-inner{grid-template-columns:100px minmax(220px,1fr) minmax(190px,.8fr);gap:12px}.draw-stack{scale:.8}}
+@media(max-width:700px){.challenge-hero{padding:30px 5% 22px;min-height:auto}.hero-topline{grid-template-columns:1fr;gap:7px}.hero-title{margin-top:18px}.title-line-one{font-size:clamp(53px,12vw,76px)}.title-line-two{font-size:clamp(45px,10.5vw,68px);margin-left:5px}.hero-left p{margin-top:24px}.hero-meta{gap:8px;margin-top:18px;font-size:7px}.hero-character-deck{height:270px;max-width:460px;width:100%;margin:0 auto}.character-card{width:36%;height:77%}.character-graves{left:31%;width:40%}.draw-platform{margin-top:5px;padding:11px}.draw-platform-inner{grid-template-columns:75px 1fr;gap:10px}.draw-stack{scale:.65;transform:translateX(-10px)}.draw-platform .hero-card{min-height:140px;padding:15px}.draw-platform .hero-card strong{font-size:clamp(21px,6vw,32px)}.draw-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:8px}.draw-action-kicker{grid-column:1/-1}.draw-platform .hero-round{grid-column:1/-1}.hero-bottom-mark{font-size:7px}}
+@media(max-width:420px){.hero-character-deck{height:230px}.character-card b{font-size:23px}.draw-platform-inner{grid-template-columns:58px 1fr}.draw-stack{scale:.52;transform:translateX(-20px)}.draw-platform .hero-draw-btn,.draw-platform .complete-btn{font-size:10px;padding:0 8px}.hero-meta{font-size:6px;gap:6px}.title-line-one{font-size:52px}.title-line-two{font-size:45px}}
+@media(prefers-reduced-motion:reduce){.character-card,.deck-orbit,.challenge-hero:after,.draw-stack-card,.draw-stack>span,.hero-title .title-line{animation:none!important}}
