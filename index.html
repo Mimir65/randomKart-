@@ -4,123 +4,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#11110f">
-  <title>DEADLOCK // CHALLENGE ROOM</title>
+  <meta name="description" content="DEADLOCK CHALLENGE — генератор жёстких испытаний для матчей Deadlock. Вытяни карту. Прими хаос.">
+  <title>DEADLOCK CHALLENGE — ARCADE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.0.0">
 </head>
 <body>
-  <div class="grain"></div>
+  <div class="grain" aria-hidden="true"></div>
   <header class="topbar">
-    <a class="brand" href="#" aria-label="Deadlock Challenge">
+    <a class="brand" href="#play" aria-label="Deadlock Challenge">
       <span class="brand-mark">D<span>/</span>C</span>
-      <span class="brand-name">CHALLENGE<br><b>ROOM</b></span>
+      <span class="brand-name">DEADLOCK<br><b>CHALLENGE</b></span>
     </a>
-    <nav class="main-nav">
-      <a class="active" href="#play">АРКАДА <i>01</i></a>
-      <a href="#rules">ПРАВИЛА <i>02</i></a>
-      <a href="#about">О ПРОЕКТЕ <i>03</i></a>
+    <nav class="main-nav" aria-label="Главная навигация">
+      <a class="active" href="#play">ARCADE <i>01</i></a>
+      <a href="#challenges">CHALLENGES <i>02</i></a>
+      <a href="#duo">DUO <i>03</i></a>
+      <a href="#about">ABOUT <i>04</i></a>
     </nav>
-    <div class="top-status"><span class="pulse"></span> СИСТЕМА ГОТОВА <small>BUILD 0.5</small></div>
+    <div class="top-status"><span class="pulse"></span> SYSTEM ONLINE <small>V1.0</small></div>
     <button class="menu-btn" id="menuBtn" aria-label="Открыть меню">☰</button>
   </header>
 
   <main>
     <section class="ticker" aria-label="Подписка на канал">
       <div class="ticker-track subscribe-track">
-        <span>ПОДПИШИСЬ НА КАНАЛ SHPUNDIKID</span><b>✳</b><span>DEADLOCK CHALLENGE</span><b>✳</b><span>ПОДПИШИСЬ НА КАНАЛ SHPUNDIKID</span><b>✳</b><span>JUST CHAOS</span><b>✳</b><span>ПОДПИШИСЬ НА КАНАЛ SHPUNDIKID</span><b>✳</b><span>DEADLOCK CHALLENGE</span><b>✳</b>
+        <span>ПОДПИШИСЬ НА КАНАЛ SHPUNDIKID</span><b>✳</b><span>DEADLOCK CHALLENGE</span><b>✳</b><span>JUST CHAOS</span><b>✳</b><span>ПОДПИШИСЬ НА КАНАЛ SHPUNDIKID</span><b>✳</b><span>DEADLOCK CHALLENGE</span><b>✳</b><span>JUST CHAOS</span><b>✳</b>
       </div>
     </section>
 
     <section class="intro challenge-hero" id="play">
       <div class="hero-left">
-        <div class="eyebrow"><span class="eyebrow-line"></span> COMMUNITY GAME MODE / 001</div>
-        <h1>DEADLOCK<br><em>HARD MODE.</em></h1>
-        <p>Никаких лёгких заданий. Вытяни испытание, прими правила и попробуй не сгореть.</p>
-        <div class="hero-meta"><span>65+ CHALLENGES</span><b>✳</b><span>NO REROLLS</span><b>✳</b><span>PURE CHAOS</span></div>
+        <div class="eyebrow"><span class="eyebrow-line"></span> COMMUNITY ARCADE / SHPUNDIKID</div>
+        <h1>YOUR MATCH.<br><em>YOUR NIGHTMARE.</em></h1>
+        <p>Вытяни испытание. Прими условия. Докажи, что способен его выполнить. Никаких перебросов — только хаос.</p>
+        <div class="hero-meta"><span><b id="heroChallengeCount">217</b>+ CHALLENGES</span><b>✳</b><span>RANDOM DRAW</span><b>✳</b><span>NO REROLLS</span></div>
+        <div class="hero-side-note"><span>01 / THE DRAW</span><br>ONE CARD. NO MERCY.</div>
       </div>
       <div class="hero-draw">
         <div class="hero-draw-top"><span>CHALLENGE TERMINAL / LIVE</span><span><i></i> READY</span></div>
-        <div class="hero-card" id="soloCard">
+        <div class="hero-card" id="soloCard" aria-live="polite">
           <span class="draw-card-index">CARD / 000</span>
-          <strong>ГОТОВ<br>К ХАРДУ?</strong>
-          <small>НАЖМИ И ПОЛУЧИ СВОЁ ИСПЫТАНИЕ</small>
+          <strong>READY FOR<br>THE CHALLENGE?</strong>
+          <small>НАЖМИ, ЧТОБЫ ВЫТЯНУТЬ СЛУЧАЙНОЕ ИСПЫТАНИЕ</small>
         </div>
         <button class="action-btn hot hero-draw-btn" id="soloDraw">ВЫТЯНУТЬ КАРТУ ↗</button>
-        <button class="action-btn complete-btn" id="soloComplete" disabled>✓ ВЫПОЛНЕНО — СЛЕДУЮЩАЯ КАРТА</button>
-        <div class="hero-round"><span id="soloRound">ROUND / 01</span><span>ONE CARD. NO MERCY.</span></div>
+        <button class="action-btn complete-btn" id="soloComplete" disabled>✓ ЗАДАНИЕ ВЫПОЛНЕНО</button>
+        <div class="hero-round"><span id="soloRound">ROUND / 01</span><span>DECK <b id="soloProgress">0 / 217</b></span><button id="resetSolo" class="reset-btn" type="button">RESET</button></div>
       </div>
     </section>
 
-    <section class="duo-entry">
-      <span class="section-index">02 / MULTIPLAYER</span>
-      <div><h2>ОДНОМУ <i>МАЛО?</i></h2><p>Создай комнату и проходи испытания вместе с напарником.</p></div>
+    <section class="arcade-strip" id="challenges">
+      <div class="strip-head"><div><span class="section-index">02 / THE DECK</span><h2>НЕ КОЛОДА. <i>ПРОВЕРКА.</i></h2></div><div class="strip-note">СЛУЧАЙНЫЙ ВЫБОР<br>БЕЗ ПОВТОРОВ ДО КОНЦА ЦИКЛА</div></div>
+      <div class="arcade-cards">
+        <article class="arcade-tile tile-main"><span class="tile-top">01 / RANDOM DRAW</span><div class="tile-graphic graphic-stamp">D<span>/</span>C</div><strong><b id="challengeTotal">217</b><small>КАРТ В КОЛОДЕ</small></strong><p>Каждое испытание имеет ID. Полученные карты не повторяются, пока не закончится текущий цикл.</p><span class="tile-foot">ONE DECK · NO CATEGORY PICK</span></article>
+        <article class="arcade-tile tile-category"><span class="tile-top">02 / MIXED RULESET</span><div class="category-stack"><i>CONTROL</i><i>HEROES</i><i>ITEMS</i><i>OBJECTIVES</i><i>DUO CHAOS</i></div><h3>ОДНА КОЛОДА.<br>РАЗНЫЕ ПРАВИЛА.</h3><span class="tile-foot">CATEGORIES ARE INTERNAL</span></article>
+        <article class="arcade-tile tile-cycle"><span class="tile-top">03 / DECK CYCLE</span><div class="cycle-number">∞</div><h3>БЕЗ ПОВТОРОВ</h3><p>После последней карты колода перемешивается и начинается новый цикл.</p><span class="tile-foot">ROUND AFTER ROUND</span></article>
+      </div>
+    </section>
+
+    <section class="duo-entry" id="duo">
+      <span class="section-index">03 / MULTIPLAYER</span>
+      <div><h2>ОДНОМУ <i>МАЛО?</i></h2><p>Создай комнату, отправь шестизначный код и проходи испытания вместе с напарником.</p></div>
       <button class="action-btn" id="duoShortcut">DUO ROOM ↗</button>
     </section>
 
     <section class="room-section" id="roomSection" hidden>
-      <div class="room-heading"><button class="text-btn duoBack" id="duoBack">← ВЫБРАТЬ ДРУГОЙ РЕЖИМ</button>
-        <span class="section-index">02 / DUO MATCHMAKING</span>
+      <div class="room-heading"><button class="text-btn duoBack" id="duoBack">← НАЗАД В ARCADE</button>
+        <span class="section-index">03 / DUO MATCHMAKING</span>
         <h2>СОЗДАЙ <i>ДУО-КОМНАТУ</i></h2>
-        <p>Для игры вдвоём. Создай комнату или введи код напарника.</p>
+        <p>Создай комнату или введи код напарника. Для разных устройств настрой Supabase — инструкция в README.</p>
       </div>
       <div class="room-panel">
-        <div class="panel-top"><span>CONNECTION_TERMINAL</span><span id="connectionState"><i></i> OFFLINE MODE</span></div>
+        <div class="panel-top"><span>CONNECTION_TERMINAL</span><span id="connectionState"><i></i> LOCAL / SAME BROWSER</span></div>
         <div class="room-actions">
-          <div class="room-action-block">
-            <div class="action-number">01</div><h3>СОЗДАТЬ КОМНАТУ</h3>
-            <p>Стань хостом и отправь код второму игроку.</p>
-            <button class="action-btn hot" id="createRoom">СОЗДАТЬ <span>↗</span></button>
-          </div>
+          <div class="room-action-block"><div class="action-number">01</div><h3>СОЗДАТЬ КОМНАТУ</h3><p>Стань хостом и отправь код второму игроку.</p><button class="action-btn hot" id="createRoom">СОЗДАТЬ ↗</button></div>
           <div class="action-divider"><span>ИЛИ</span></div>
-          <div class="room-action-block">
-            <div class="action-number">02</div><h3>ПРИСОЕДИНИТЬСЯ</h3>
-            <p>Введи код комнаты, который тебе отправили.</p>
-            <div class="join-line"><input id="roomCodeInput" maxlength="6" placeholder="КОД: A7K2Q9" autocomplete="off"><button class="action-btn" id="joinRoom">ВОЙТИ ↗</button></div>
-          </div>
+          <div class="room-action-block"><div class="action-number">02</div><h3>ПРИСОЕДИНИТЬСЯ</h3><p>Введи код комнаты, который тебе отправили.</p><div class="join-line"><input id="roomCodeInput" maxlength="6" placeholder="КОД: A7K2Q9" autocomplete="off" aria-label="Код комнаты"><button class="action-btn" id="joinRoom">ВОЙТИ ↗</button></div></div>
         </div>
-        <div class="panel-foot"><span>LOCAL MODE: SAME BROWSER ONLY</span><span>ONLINE MODE: SUPABASE CONFIG REQUIRED</span></div>
+        <div class="panel-foot"><span>LOCAL: SAME BROWSER</span><span>ONLINE: SUPABASE REALTIME</span></div>
       </div>
     </section>
 
     <section class="game-section" id="gameSection" hidden>
-      <div class="game-top">
-        <div><span class="section-index">03 / ACTIVE DUO SESSION</span><h2>КОМНАТА <i id="activeRoomCode">------</i></h2></div>
-        <div class="session-meta"><span id="roomMode">LOCAL ROOM</span><button id="leaveRoom" class="text-btn">ПОКИНУТЬ ↗</button></div>
-      </div>
+      <div class="game-top"><div><span class="section-index">04 / ACTIVE DUO SESSION</span><h2>КОМНАТА <i id="activeRoomCode">------</i></h2></div><div class="session-meta"><span id="roomMode">LOCAL ROOM</span><button id="leaveRoom" class="text-btn">ПОКИНУТЬ ↗</button></div></div>
       <div class="players-strip">
-        <div class="player-slot"><span class="player-tag">PLAYER 01 / HOST</span><strong id="playerOneName">ИГРОК 1</strong><small id="playerOneState">ОЖИДАЕТ...</small></div>
-        <div class="versus">VS</div>
+        <div class="player-slot"><span class="player-tag">PLAYER 01 / HOST</span><strong id="playerOneName">ИГРОК 1</strong><small id="playerOneState">ОЖИДАЕТ...</small></div><div class="versus">VS</div>
         <div class="player-slot"><span class="player-tag">PLAYER 02 / GUEST</span><strong id="playerTwoName">ИГРОК 2</strong><small id="playerTwoState">ОЖИДАЕТ...</small></div>
       </div>
-      <div class="challenge-controls duo-single-control">
-        <div class="draw-box">
-          <span class="control-label">ТВОЁ ИСПЫТАНИЕ</span>
-          <div class="draw-card" id="drawCard"><span class="draw-card-index">CARD / 000</span><strong>ГОТОВ<br>К ВЫТЯГИВАНИЮ?</strong><small>НАЖМИ КНОПКУ НИЖЕ</small></div>
-          <button class="action-btn hot draw-btn" id="drawChallenge">ВЫТЯНУТЬ КАРТУ ↗</button>
-
-        </div>
-      </div>
-      <div class="reveal-area" id="revealArea">
-        <div class="reveal-head"><span>FINAL REVEAL</span><span id="revealStatus">ОЖИДАЕМ ОБОИХ ИГРОКОВ</span></div>
-        <div class="reveal-grid">
-          <div class="reveal-card"><span>PLAYER 01</span><h3 id="revealOneTitle">???</h3><p id="revealOneText">Карты пока закрыты.</p></div>
-          <div class="reveal-card"><span>PLAYER 02</span><h3 id="revealTwoTitle">???</h3><p id="revealTwoText">Карты пока закрыты.</p></div>
-        </div>
-        <div class="reveal-bottom">ОБЕ КАРТЫ ОТКРОЮТСЯ, КОГДА ОБА ИГРОКА ЗАФИКСИРУЮТ ВЫБОР.</div>
-        <button class="action-btn complete-btn" id="duoComplete" disabled>✓ МОЁ ЗАДАНИЕ ВЫПОЛНЕНО</button>
-      </div>
+      <div class="challenge-controls duo-single-control"><div class="draw-box"><div class="duo-draw-meta"><span class="control-label">ТВОЁ ИСПЫТАНИЕ</span><span id="duoRound">ROUND / 01</span></div><div class="draw-card" id="drawCard"><span class="draw-card-index">CARD / 000</span><strong>ГОТОВ К ВЫТЯГИВАНИЮ?</strong><small>ЗАФИКСИРУЙ ВЫБОР — КАРТЫ ОТКРОЮТСЯ ВМЕСТЕ</small></div><button class="action-btn hot draw-btn" id="drawChallenge" disabled>ОЖИДАЕМ НАПАРНИКА</button></div></div>
+      <div class="reveal-area" id="revealArea"><div class="reveal-head"><span>FINAL REVEAL</span><span id="revealStatus">ОЖИДАЕМ ОБОИХ ИГРОКОВ</span></div><div class="reveal-grid"><div class="reveal-card"><span>PLAYER 01</span><h3 id="revealOneTitle">???</h3><p id="revealOneText">Карты пока закрыты.</p></div><div class="reveal-card"><span>PLAYER 02</span><h3 id="revealTwoTitle">???</h3><p id="revealTwoText">Карты пока закрыты.</p></div></div><div class="reveal-bottom">НОВЫЙ РАУНД НАЧНЁТСЯ ТОЛЬКО ПОСЛЕ ПОДТВЕРЖДЕНИЯ ОБОИХ ИГРОКОВ.</div><button class="action-btn complete-btn" id="duoComplete" disabled>✓ МОЁ ЗАДАНИЕ ВЫПОЛНЕНО</button></div>
     </section>
 
-    <footer class="footer">
-      <div class="footer-brand">D<span>/</span>C</div>
-      <div>NOT AN OFFICIAL VALVE PRODUCT<br><span>MADE FOR CHAOS, NOT FOR RANKED.</span></div>
-      <div class="footer-right">DEADLOCK CHALLENGE ROOM <b>© 2026</b></div>
-    </footer>
+    <footer class="footer" id="about"><div class="footer-brand">D<span>/</span>C</div><div>NOT AN OFFICIAL VALVE PRODUCT<br><span>MADE FOR CHAOS, NOT FOR RANKED.</span></div><div class="footer-right"><a href="https://www.youtube.com/@Shpundikid" target="_blank" rel="noopener">YOUTUBE / SHPUNDIKID ↗</a><b>© 2026</b></div></footer>
   </main>
-
-  <div class="toast" id="toast" role="status"></div>
-  <script src="app.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js?v=1.0.0"></script>
 </body>
 </html>

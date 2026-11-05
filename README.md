@@ -1,14 +1,87 @@
-# DEADLOCK CHALLENGE ROOM — v0.9
+# DEADLOCK CHALLENGE v1.0
 
-- Main screen opens directly on the challenge card.
-- 114 hard challenges in one mixed deck, no category or difficulty picker.
-- New challenges do not repeat until the deck cycles.
-- Card reveal uses a 3D flip animation and shine effect.
-- Top ticker promotes the Shpundikid channel.
-- Duo mode is still a local same-browser demo; cross-device play needs a realtime backend.
+Обновление существующего проекта v0.9. Исходные файлы и визуальная основа сохранены; механика и интерфейс расширены.
 
-Edit `challengeDeck` in `app.js`; each card is `[TITLE, DESCRIPTION]`.
+## Что внутри
 
-Publish by replacing `index.html`, `style.css`, `app.js`, and `README.md` in your GitHub repository root.
+- 114 исходных испытаний сохранены.
+- 103 новых испытаний добавлены.
+- Всего: **217 карточек** с уникальными ID `DC-001` … `DC-217`.
+- Единая случайная колода без выбора категорий и сложности.
+- Карта не повторяется до конца цикла; затем начинается новый цикл.
+- Быстрый 3D flip, shine и блокировка повторного клика на время анимации.
+- Состояние Solo (раунд, текущая карта и история колоды) сохраняется в `localStorage`.
+- Duo: шестизначный код, отдельная карта каждому игроку, одновременное раскрытие, подтверждение обоих и переход к следующему раунду только после двух подтверждений.
+- Локальный Duo работает в двух вкладках одного браузера/профиля на одном origin через `localStorage` + `BroadcastChannel`.
+- Опциональный Supabase Realtime адаптер для разных устройств.
+- Адаптивная верстка для desktop/tablet/mobile; уважает `prefers-reduced-motion`.
 
-Unofficial fan-made project. Not affiliated with Valve.
+## Структура
+
+- `index.html` — структура и секции сайта.
+- `style.css` — дизайн, адаптивность и анимации.
+- `app.js` — колода, Solo, Duo и интеграция Supabase.
+
+## Добавление испытаний
+
+В `app.js` найди массив `extraChallenges`. Добавляй элементы в формате:
+
+```js
+{
+  category: 'КАТЕГОРИЯ',
+  title: 'НАЗВАНИЕ ИСПЫТАНИЯ',
+  description: 'Подробное условие, которое реально выполнить в матче.'
+}
+```
+
+ID для новых карточек назначаются автоматически при загрузке. Названия в массиве должны быть уникальными.
+
+## Публикация на GitHub Pages
+
+1. Распакуй архив.
+2. Замени в корне репозитория `index.html`, `style.css`, `app.js` и `README.md`.
+3. Сделай commit/push.
+4. Открой GitHub Pages и обнови страницу с жёсткой перезагрузкой (`Ctrl + F5`). В подключениях CSS/JS используется версия `v=1.0.0`, чтобы не цеплять старый кэш.
+
+## Duo: локальный режим и настоящий онлайн
+
+Без Supabase комната работает только в том же браузере и профиле (например, две вкладки одного браузера). Код комнаты сам по себе не передаёт состояние между разными устройствами.
+
+Для разных устройств:
+
+1. Создай проект на Supabase.
+2. В SQL Editor выполни:
+
+```sql
+create table if not exists public.dc_rooms (
+  code text primary key,
+  data jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.dc_rooms enable row level security;
+
+create policy "dc_rooms_select_by_code" on public.dc_rooms
+  for select to anon using (true);
+create policy "dc_rooms_insert" on public.dc_rooms
+  for insert to anon with check (true);
+create policy "dc_rooms_update" on public.dc_rooms
+  for update to anon using (true) with check (true);
+
+alter publication supabase_realtime add table public.dc_rooms;
+```
+
+3. В Supabase Settings → API скопируй Project URL и `anon` / publishable key.
+4. В начале `app.js` заполни `SUPABASE_URL` и `SUPABASE_ANON_KEY`.
+5. Перезалей `app.js` на GitHub Pages. Кнопки создания и подключения начнут использовать Supabase Realtime.
+
+**Важно:** ключ `service_role` никогда не вставляй в сайт. Приведённые политики открывают доступ к строкам таблицы всем анонимным посетителям, знающим/угадавшим код. Это приемлемо только для незащищённых игровых комнат без личных данных. Для публичного продакшена стоит добавить серверную Edge Function, проверку участника и ограничение частоты запросов. Удаление старых комнат можно настроить отдельной scheduled Edge Function/cron.
+
+## Ограничения, которые не скрываются
+
+- Supabase-онлайн требует создать проект, таблицу, включить Realtime и указать URL/anon key.
+- Локальный режим не является мультиплеером через интернет.
+- Колода — вручную составленные челленджи, а не подключение к игровому API; сайт не проверяет выполнение условий автоматически.
+- Ссылка YouTube в футере ведёт на `youtube.com/@Shpundikid`; если у канала другой handle, поменяй URL в `index.html`.
+
+Unofficial fan-made project. Not affiliated with Valve Corporation.
